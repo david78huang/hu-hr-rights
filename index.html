@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>匈牙利华人生活指南</title>
+    <script>
+        // 检测移动设备自动跳转到手机版（除非强制桌面版）
+        if (!window.location.search.includes('desktop=1') && 
+            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            window.location.href = 'mobile.html';
+        }
+    </script>
     <style>
         * {
             margin: 0;
