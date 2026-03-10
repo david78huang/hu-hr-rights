@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>匈牙利华人指南导航中心 🇭🇺</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            padding: 60px 20px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        .section h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .project-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+        
+        .project-card h3 {
+            color: #2c3e50;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+        
+        .project-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .status-stable {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-dev {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .project-card p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .project-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-tag {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #333;
+            border: 2px solid #dee2e6;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .quick-choice {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            border-radius: 15px;
+            padding: 30px;
+        }
+        
+        .choice-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .choice-item:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .choice-icon {
+            font-size: 2em;
+            flex-shrink: 0;
+        }
+        
+        .choice-content h4 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        
+        .choice-content p {
+            color: #666;
+            font-size: 0.95em;
+        }
+        
+        .choice-content a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .emergency {
+            background: #fff5f5;
+            border: 2px solid #feb2b2;
+            border-radius: 15px;
+            padding: 25px;
+        }
+        
+        .emergency h3 {
+            color: #c53030;
+            margin-bottom: 15px;
+        }
+        
+        .emergency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .emergency-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .emergency-item strong {
+            display: block;
+            color: #c53030;
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 40px;
+            color: white;
+            opacity: 0.9;
+        }
+        
+        .footer a {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 25px;
+            }
+            
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🇭🇺 匈牙利华人指南导航中心</h1>
+            <p>为在匈牙利生活、工作、学习的华人提供一站式指南导航</p>
+        </header>
+        
+        <main class="content">
+            <!-- 项目列表 -->
+            <section class="section">
+                <h2>📚 项目列表</h2>
+                <div class="project-grid">
+                    <!-- 职场权益指南 -->
+                    <div class="project-card">
+                        <h3>💼 匈牙利华人职场权益指南</h3>
+                        <span class="project-status status-stable">✅ 稳定版</span>
+                        <p>专为在匈牙利工作的华人编写的职场权益手册，涵盖劳动合同、工资税务、离职赔偿、劳动纠纷等核心议题。</p>
+                        <div class="project-features">
+                            <span class="feature-tag">劳动法详解</span>
+                            <span class="feature-tag">赔偿金计算器</span>
+                            <span class="feature-tag">真实案例</span>
+                            <span class="feature-tag">PDF下载</span>
+                        </div>
+                        <div class="btn-group">
+                            <a href="https://david78huang.github.io/hu-hr-rights/" class="btn btn-primary">访问网站</a>
+                            <a href="https://github.com/david78huang/hu-hr-rights" class="btn btn-secondary">GitHub</a>
+                        </div>
+                    </div>
+                    
+                    <!-- 生活指南 -->
+                    <div class="project-card">
+                        <h3>🏠 匈牙利华人生活指南</h3>
+                        <span class="project-status status-stable">✅ 已合并</span>
+                        <p>全面的匈牙利生活指南，覆盖新移民落地、居留签证、住房租房、医疗保险、银行金融、交通出行、教育等方方面面。已与职场权益指南合并。</p>
+                        <div class="project-features">
+                            <span class="feature-tag">新移民落地</span>
+                            <span class="feature-tag">生活指南</span>
+                            <span class="feature-tag">实用工具</span>
+                            <span class="feature-tag">本地资源</span>
+                        </div>
+                        <div class="btn-group">
+                            <a href="https://david78huang.github.io/hu-hr-rights/" class="btn btn-primary">访问网站</a>
+                            <a href="https://github.com/david78huang/hu-hr-rights" class="btn btn-secondary">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 快速选择 -->
+            <section class="section">
+                <h2>🗺️ 快速选择</h2>
+                <div class="quick-choice">
+                    <div class="choice-item">
+                        <span class="choice-icon">🧑‍💼</span>
+                        <div class="choice-content">
+                            <h4>我在匈牙利工作</h4>
+                            <p>了解劳动合同、工资税务、计算离职赔偿、处理劳动纠纷 → <a href="https://david78huang.github.io/hu-hr-rights/">访问职场权益指南</a></p>
+                        </div>
+                    </div>
+                    <div class="choice-item">
+                        <span class="choice-icon">🏠</span>
+                        <div class="choice-content">
+                            <h4>我刚来匈牙利</h4>
+                            <p>办理地址卡、税号、租房、开户、了解医疗系统 → <a href="https://david78huang.github.io/hu-hr-rights/">访问生活指南</a></p>
+                        </div>
+                    </div>
+                    <div class="choice-item">
+                        <span class="choice-icon">👨‍👩‍👧</span>
+                        <div class="choice-content">
+                            <h4>我带孩子来匈牙利</h4>
+                            <p>学校选择、入学流程、课外活动 → <a href="https://david78huang.github.io/hu-hr-rights/">访问生活指南 - 教育篇</a></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 紧急联系 -->
+            <section class="section">
+                <h2>🆘 紧急联系</h2>
+                <div class="emergency">
+                    <div class="emergency-grid">
+                        <div class="emergency-item">
+                            <strong>112</strong>
+                            报警/急救/消防
+                        </div>
+                        <div class="emergency-item">
+                            <strong>+36 30 692 5414</strong>
+                            中国驻匈使馆领事保护
+                        </div>
+                        <div class="emergency-item">
+                            <strong>+36 1 475 5200</strong>
+                            匈牙利劳动监察局
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="footer">
+            <p>愿每一位在匈牙利的朋友，都能安居乐业！💪</p>
+            <p>维护者: David Huang | <a href="https://github.com/yourusername">GitHub</a></p>
+        </footer>
+    </div>
+</body>
+</html>
