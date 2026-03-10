@@ -1,0 +1,42 @@
+theme: jekyll-theme-cayman
+title: 匈牙利华人生活指南
+description: 为在匈牙利生活、工作、学习的华人提供全面的生活指南，涵盖新移民落地、居留签证、住房租房、医疗保险、银行金融、交通出行、教育等方方面面
+url: https://david78huang.github.io
+baseurl: /hungary-chinese-guide
+
+# 作者信息
+author:
+  name: OpenClaw Community
+
+# 社交链接
+social:
+  name: GitHub
+  links:
+    - https://github.com/david78huang/hungary-chinese-guide
+
+# 插件
+plugins:
+  - jekyll-relative-links
+  - jekyll-readme-index
+
+# 包含目录
+include:
+  - docs
+  - templates
+  - tools
+  - pdf-output
+
+# Markdown 设置
+markdown: kramdown
+kramdown:
+  input: GFM
+
+# 时区
+timezone: Europe/Budapest
+
+# 排除文件
+exclude:
+  - generate-pdf.sh
+  - GITHUB-PAGES-GUIDE.md
+  - INSTALL.md
+  - PROJECT-INTRO.md
