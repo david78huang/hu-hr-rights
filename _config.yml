@@ -2,7 +2,7 @@ theme: jekyll-theme-cayman
 title: 匈牙利华人生活指南
 description: 为在匈牙利生活、工作、学习的华人提供全面的生活指南，涵盖新移民落地、居留签证、住房租房、医疗保险、银行金融、交通出行、教育等方方面面
 url: https://david78huang.github.io
-baseurl: /hungary-chinese-guide
+baseurl: /hu-hr-rights
 
 # 作者信息
 author:
@@ -12,7 +12,7 @@ author:
 social:
   name: GitHub
   links:
-    - https://github.com/david78huang/hungary-chinese-guide
+    - https://github.com/david78huang/hu-hr-rights
 
 # 插件
 plugins:
