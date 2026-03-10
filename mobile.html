@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>匈牙利华人指南 - 手机版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            font-size: 16px;
+        }
+        
+        /* 头部 */
+        .header {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 1.4em;
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            font-size: 0.85em;
+            opacity: 0.9;
+        }
+        
+        /* 搜索栏 */
+        .search-box {
+            padding: 15px;
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            background: #f8f8f8;
+        }
+        
+        .search-input:focus {
+            border-color: #11998e;
+            background: white;
+        }
+        
+        /* 紧急联系 */
+        .emergency-bar {
+            background: #ffebee;
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-bottom: 1px solid #ffcdd2;
+        }
+        
+        .emergency-item {
+            text-align: center;
+            text-decoration: none;
+            color: #c62828;
+        }
+        
+        .emergency-item .icon {
+            font-size: 1.5em;
+            display: block;
+        }
+        
+        .emergency-item .label {
+            font-size: 0.7em;
+            margin-top: 3px;
+        }
+        
+        /* 快速入口 */
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: #e0e0e0;
+            margin-bottom: 10px;
+        }
+        
+        .quick-item {
+            background: white;
+            padding: 15px 5px;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+        }
+        
+        .quick-item:active {
+            background: #f0f0f0;
+        }
+        
+        .quick-item .icon {
+            font-size: 1.8em;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .quick-item .label {
+            font-size: 0.75em;
+        }
+        
+        /* 内容区块 */
+        .section {
+            background: white;
+            margin-bottom: 10px;
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .section-title {
+            padding: 15px;
+            font-size: 1em;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .section-title .icon {
+            font-size: 1.2em;
+        }
+        
+        /* 列表项 */
+        .list-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            text-decoration: none;
+            color: #333;
+            background: white;
+        }
+        
+        .list-item:last-child {
+            border-bottom: none;
+        }
+        
+        .list-item:active {
+            background: #f5f5f5;
+        }
+        
+        .list-icon {
+            font-size: 1.5em;
+            margin-right: 12px;
+            width: 30px;
+            text-align: center;
+        }
+        
+        .list-content {
+            flex: 1;
+        }
+        
+        .list-title {
+            font-size: 1em;
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+        
+        .list-desc {
+            font-size: 0.8em;
+            color: #666;
+        }
+        
+        .list-arrow {
+            color: #999;
+            font-size: 1.2em;
+        }
+        
+        /* 速查卡片 */
+        .quick-cards {
+            padding: 15px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .quick-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+        
+        .quick-card h4 {
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+        
+        .quick-card .value {
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+        
+        .quick-card .unit {
+            font-size: 0.75em;
+            opacity: 0.8;
+        }
+        
+        /* 底部导航 */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            z-index: 100;
+        }
+        
+        .nav-item {
+            text-align: center;
+            text-decoration: none;
+            color: #666;
+            font-size: 0.7em;
+            padding: 5px 15px;
+        }
+        
+        .nav-item.active {
+            color: #11998e;
+        }
+        
+        .nav-item .icon {
+            font-size: 1.5em;
+            display: block;
+            margin-bottom: 2px;
+        }
+        
+        /* 内容区域底部留白 */
+        .content-wrapper {
+            padding-bottom: 70px;
+        }
+        
+        /* 隐藏滚动条但保持功能 */
+        ::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <header class="header">
+        <h1>🇭🇺 匈牙利华人指南</h1>
+        <p>生活 · 工作 · 学习</p>
+    </header>
+    
+    <!-- 搜索 -->
+    <div class="search-box">
+        <input type="text" class="search-input" placeholder="搜索问题，如：地址卡、税号、租房..." id="searchInput">
+    </div>
+    
+    <!-- 紧急联系 -->
+    <div class="emergency-bar">
+        <a href="tel:112" class="emergency-item">
+            <span class="icon">🚨</span>
+            <span class="label">急救</span>
+        </a>
+        <a href="tel:+3614132400" class="emergency-item">
+            <span class="icon">🏛️</span>
+            <span class="label">使馆</span>
+        </a>
+        <a href="tel:+3614755200" class="emergency-item">
+            <span class="icon">💼</span>
+            <span class="label">劳动</span>
+        </a>
+        <a href="tel:+3613210404" class="emergency-item">
+            <span class="icon">⚖️</span>
+            <span class="label">法律</span>
+        </a>
+    </div>
+    
+    <div class="content-wrapper">
+        <!-- 快速入口 -->
+        <div class="quick-grid">
+            <a href="docs/08-新移民落地指南" class="quick-item">
+                <span class="icon">🛬</span>
+                <span class="label">新移民</span>
+            </a>
+            <a href="docs/10-住房与租房" class="quick-item">
+                <span class="icon">🏠</span>
+                <span class="label">租房</span>
+            </a>
+            <a href="docs/11-医疗与保险" class="quick-item">
+                <span class="icon">🏥</span>
+                <span class="label">医疗</span>
+            </a>
+            <a href="docs/12-银行与金融" class="quick-item">
+                <span class="icon">🏦</span>
+                <span class="label">银行</span>
+            </a>
+            <a href="docs/13-交通与出行" class="quick-item">
+                <span class="icon">🚇</span>
+                <span class="label">交通</span>
+            </a>
+            <a href="docs/14-教育与孩子" class="quick-item">
+                <span class="icon">🎓</span>
+                <span class="label">教育</span>
+            </a>
+            <a href="docs/01-劳动法核心条款" class="quick-item">
+                <span class="icon">💼</span>
+                <span class="label">工作</span>
+            </a>
+            <a href="docs/16-买房指南" class="quick-item">
+                <span class="icon">🏡</span>
+                <span class="label">买房</span>
+            </a>
+        </div>
+        
+        <!-- 新移民必读 -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">🛬</span>
+                <span>新移民必读</span>
+            </div>
+            <a href="docs/08-新移民落地指南" class="list-item">
+                <span class="list-icon">📋</span>
+                <div class="list-content">
+                    <div class="list-title">落地第一周任务清单</div>
+                    <div class="list-desc">地址卡、税号、银行、手机卡办理顺序</div>
+                </div>
+                <span class="list-arrow">›</span>
+            </a>
+            <a href="docs/97-新移民落地案例" class="list-item">
+                <span class="list-icon">📖</span>
+                <div class="list-content">
+                    <div class="list-title">真实案例：小李的落地记</div>
+                    <div class="list-desc">5天完成所有手续的完整记录</div>
+                </div>
+                <span class="list-arrow">›</span>
+            </a>
+            <a href="docs/09-居留与签证" class="list-item">
+                <span class="list-icon">🛂</span>
+                <div class="list-content">
+                    <div class="list-title">居留许可与签证</div>
+                    <div class="list-desc">工作许可、续签、黄金签证详解</div>
+                </div>
+                <span class="list-arrow">›</span>
+            </a>
+        </div>
+        
+        <!-- 生活指南 -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">🏠</span>
+                <span>生活指南</span>
+            </div>
+            <a href="docs/10-住房与租房" class="list-item">
+                <span class="list-icon">🔑</span>
+                <div class="list-content">
+                    <div class="list-title">租房避坑指南</div>
+                    <div class="list-desc">合同陷阱、押金纠纷、看房清单</div>
+                </div>
+                <span class="list-arrow">›</span>
+            </a>
+            <a href="docs/11-医疗与保险" class="list-item">
+                <span class="list-icon">💊</span>
+                <div class="list-content">
+                    <div class="list-title">TAJ医保使用指南</div>
+                    <div class="list-desc">如何看病、急诊流程、药店购药</div>
+                </div>
+                <span class="list-arrow">›</span>
+            </a>
+            <a href="docs/12-银行与金融" class="list-item">
+                <span class="list-icon">💳</span>
+                <div class="list-content">
+                    <div class="list-title">银行开户与汇款</div>
+                    <div class="list-desc">OTP/K&H对比、汇款回国省钱攻略</div>
+                </div>
+                <span class="list-arrow">›</span>
+            </a>
+            <a href="docs/15-日常生活" class="list-item">
+                <span class="list-icon">🛒</span>
+                <div class="list-content">
+                    <div class="list-title">日常生活指南</div>
+                    <div class="list-desc">超市、外卖、天气、温泉</div>
+                </div>
+                <span class="list-arrow">›</span>
+            </a>
+        </div>
+        
+        <!-- 工作权益 -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">💼</span>
+                <span>工作权益</span>
+            </div>
+            <a href="docs/01-劳动法核心条款" class="list-item">
+                <span class="list-icon">📄</span>
+                <div class="list-content">
+                    <div class="list-title">劳动法核心条款</div>
+                    <div class="list-desc">合同、工时、休假、赔偿标准</div>
+                </div>
+                <span class="list-arrow">›</span>
+            </a>
+            <a href="docs/04-离职与赔偿" class="list-item">
+                <span class="list-icon">💰</span>
+                <div class="list-content">
+                    <div class="list-title">离职赔偿计算器</div>
+                    <div class="list-desc">工作3年+有赔偿，一键计算</div>
+                </div>
+                <span class="list-arrow">›</span>
+            </a>
+            <a href="docs/05-劳动纠纷处理" class="list-item">
+                <span class="list-icon">⚖️</span>
+                <div class="list-content">
+                    <div class="list-title">劳动纠纷处理</div>
+                    <div class="list-desc">投诉流程、证据收集、法院诉讼</div>
+                </div>
+                <span class="list-arrow">›</span>
+            </a>
+            <a href="docs/98-真实案例" class="list-item">
+                <span class="list-icon">📚</span>
+                <div class="list-content">
+                    <div class="list-title">6个真实案例</div>
+                    <div class="list-desc">试用期被辞、赔偿争议、加班费</div>
+                </div>
+                <span class="list-arrow">›</span>
+            </a>
+        </div>
+        
+        <!-- 速查数据 -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">📊</span>
+                <span>速查数据</span>
+            </div>
+            <div class="quick-cards">
+                <div class="quick-card">
+                    <h4>个人所得税</h4>
+                    <div class="value">15<span class="unit">%</span></div>
+                </div>
+                <div class="quick-card">
+                    <h4>社保缴纳</h4>
+                    <div class="value">18.5<span class="unit">%</span></div>
+                </div>
+                <div class="quick-card">
+                    <h4>基础年假</h4>
+                    <div class="value">20<span class="unit">天</span></div>
+                </div>
+                <div class="quick-card">
+                    <h4>急诊电话</h4>
+                    <div class="value">112</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 更多案例 -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">📖</span>
+                <span>更多案例</span>
+            </div>
+            <a href="docs/96-生活指南案例集" class="list-item">
+                <span class="list-icon">🏠</span>
+                <div class="list-content">
+                    <div class="list-title">生活案例集（10个）</div>
+                    <div class="list-desc">租房、医疗、银行、教育真实经历</div>
+                </div>
+                <span class="list-arrow">›</span>
+            </a>
+            <a href="docs/97-新移民落地案例" class="list-item">
+                <span class="list-icon">✈️</span>
+                <div class="list-content">
+                    <div class="list-title">新移民落地案例（5个）</div>
+                    <div class="list-desc">工作、留学、投资不同路径</div>
+                </div>
+                <span class="list-arrow">›</span>
+            </a>
+        </div>
+        
+        <!-- PDF下载 -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">📥</span>
+                <span>离线下载</span>
+            </div>
+            <a href="pdf-output/匈牙利华人生活指南.pdf" class="list-item">
+                <span class="list-icon">📄</span>
+                <div class="list-content">
+                    <div class="list-title">完整版 PDF</div>
+                    <div class="list-desc">19篇文档，4万+字，适合打印</div>
+                </div>
+                <span class="list-arrow">›</span>
+            </a>
+            <a href="pdf-output/速查手册.pdf" class="list-item">
+                <span class="list-icon">📱</span>
+                <div class="list-content">
+                    <div class="list-title">速查手册 PDF</div>
+                    <div class="list-desc">精简版，适合手机查看</div>
+                </div>
+                <span class="list-arrow">›</span>
+            </a>
+        </div>
+    </div>
+    
+    <!-- 底部导航 -->
+    <nav class="bottom-nav">
+        <a href="mobile.html" class="nav-item active">
+            <span class="icon">🏠</span>
+            <span>首页</span>
+        </a>
+        <a href="docs/00-总览" class="nav-item">
+            <span class="icon">📖</span>
+            <span>文档</span>
+        </a>
+        <a href="hub/" class="nav-item">
+            <span class="icon">🧭</span>
+            <span>导航</span>
+        </a>
+        <a href="pdf-output/速查手册.pdf" class="nav-item">
+            <span class="icon">📥</span>
+            <span>下载</span>
+        </a>
+    </nav>
+    
+    <script>
+        // 搜索功能
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                var query = this.value;
+                if (query) {
+                    // 简单的关键词跳转
+                    var keywords = {
+                        '地址卡': 'docs/08-新移民落地指南',
+                        '税号': 'docs/08-新移民落地指南',
+                        '银行': 'docs/12-银行与金融',
+                        '租房': 'docs/10-住房与租房',
+                        '医保': 'docs/11-医疗与保险',
+                        '工作': 'docs/01-劳动法核心条款',
+                        '赔偿': 'docs/04-离职与赔偿',
+                        '签证': 'docs/09-居留与签证',
+                        '教育': 'docs/14-教育与孩子',
+                        '交通': 'docs/13-交通与出行'
+                    };
+                    
+                    for (var key in keywords) {
+                        if (query.indexOf(key) !== -1) {
+                            window.location.href = keywords[key];
+                            return;
+                        }
+                    }
+                    
+                    alert('请输入更具体的关键词，如：地址卡、租房、医保等');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
